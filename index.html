@@ -21,8 +21,7 @@
     *{box-sizing:border-box;margin:0;padding:0;}
     html,body{
       height:100%;
-      background:var(--fondo) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAHgCAYAAAC5...') repeat;
-      background-size:cover;
+      background:var(--fondo);
       color:var(--text);
       font-family:'Montserrat',sans-serif;
       overflow-x:hidden;
@@ -118,6 +117,36 @@
     }
     .actions{margin-top:1rem;}
 
+    /* COLLAGE NUEVO */
+    .collage {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-top: 1.5rem;
+      align-items: center;
+      justify-items: center;
+    }
+    .collage img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 14%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .collage img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+    .collage img.tall { grid-row: span 2; border-radius: 10%; }
+    .collage img.wide { grid-column: span 2; border-radius: 20%; }
+    .collage img.round { border-radius: 50%; }
+    .collage img.big { grid-column: span 2; grid-row: span 2; }
+    .collage img.small { border-radius: 18%; }
+    @media (max-width:600px){
+      .collage{grid-template-columns:repeat(2,1fr);}
+    }
+
     /* Itinerario */
     .timeline{list-style:none;margin:0;padding:0;display:grid;gap:18px;}
     .timeline li{
@@ -152,33 +181,44 @@
     </div>
   </section>
 
-  <!-- ====== PARTE 2: Invitación completa ====== -->
   <main id="app" class="wrap hidden">
-
     <section class="hero fade-in">
       <div class="script">¡Nos casamos!</div>
       <h1>Mica & Jaime</h1>
       <div class="date">Sábado 21 de marzo de 2026 · Casona Macul, Santiago</div>
-
       <div class="monogram">
         <img src="Logo_Definitivo.png" alt="Monograma M/J" loading="lazy"/>
       </div>
-
       <div class="countdown" id="countdown" aria-live="polite">
         <div class="tile"><div class="num" id="dd">00</div><div class="lab">Días</div></div>
         <div class="tile"><div class="num" id="hh">00</div><div class="lab">Horas</div></div>
         <div class="tile"><div class="num" id="mm">00</div><div class="lab">Minutos</div></div>
         <div class="tile"><div class="num" id="ss">00</div><div class="lab">Segundos</div></div>
       </div>
-
       <div class="actions">
         <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeqz8lsG4Y-pQBoB7dupIrgVAS9QEch59lGK4WTfqLHHZ5LrQ/viewform?usp=header" rel="noopener">Confirmar asistencia</a>
         <a class="btn" href="https://maps.google.com/?q=Casona+Macul+Av.+Las+Perdices+5101" target="_blank" rel="noopener">Ver ubicación</a>
       </div>
     </section>
 
-    <!-- Aquí continuarían tus secciones: itinerario, historia, dresscode, playlist, regalos, whatsapp, calendario, etc. -->
-    <!-- (Puedes copiar desde tu archivo anterior las secciones siguientes sin cambiar su orden, ya que el diseño está preparado para integrarlas fluidamente.) -->
+    <!-- Collage actualizado -->
+    <section class="card fade-in">
+      <div class="title">Nuestra historia</div>
+      <div class="collage">
+        <img src="IMG_8695.JPG" alt="Mica y Jaime" class="tall" />
+        <img src="IMG_8710.JPG" alt="Mica y Jaime" class="round" />
+        <img src="Foto_Lima.JPEG" alt="Mica y Jaime" class="wide" />
+        <img src="San_Andre.JPEG" alt="Mica y Jaime" class="small" />
+        <img src="MATRI.png" alt="Mica y Jaime" class="big" />
+        <img src="QUILLON.png" alt="Mica y Jaime" class="round" />
+        <img src="Foto_reemplazo.png" alt="Mica y Jaime" class="small" />
+        <img src="RIO_TIGRE.JPEG" alt="Mica y Jaime" class="wide" />
+        <img src="LAPA.png" alt="Mica y Jaime" class="round" />
+        <img src="coliumo.JPEG" alt="Mica y Jaime" class="small" />
+      </div>
+    </section>
+
+    <!-- (Aquí siguen tus demás secciones: itinerario, dresscode, playlist, regalos, whatsapp, calendario, etc.) -->
 
     <footer class="fade-in">Con amor, Mica & Jaime · 2025</footer>
   </main>
