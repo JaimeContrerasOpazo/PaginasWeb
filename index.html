@@ -71,13 +71,30 @@ body.opened .bg-floral{opacity:0;}
   background:var(--crema);border-radius:12px;display:grid;place-items:center;
   box-shadow:0 10px 20px rgba(0,0,0,.1); padding:2%;
 }
-.paper .logo-paper{
-  width:min(70%,520px);
-  display:block;
-  filter:drop-shadow(0 2px 4px rgba(0,0,0,.08));
-  cursor:pointer;
+/* Contenido dentro del papel del sobre */
+.paper-content{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:8px 6px;
+  width:100%;height:100%;
+}
+.paper-content img{
+  /* AJUSTE: logo un poco más pequeño y armónico */
+  width:min(36vmin,180px);
+  border-radius:50%;
+  margin-bottom:12px;
+  filter:drop-shadow(0 2px 5px rgba(0,0,0,.1));
+}
+.paper-note{
+  /* AJUSTE: tipografía caligráfica elegante */
+  font-family:'Great Vibes',cursive;
+  color:var(--dorado);
+  font-size:clamp(1.2rem,3.2vw,1.6rem);
+  line-height:1.1;
 }
 
+/* Animaciones de apertura */
 .envelope.open .flap{transform:rotateX(180deg);}
 .envelope.open .paper{transform:translateY(-25%);transition:transform 1s ease;}
 
@@ -123,16 +140,12 @@ body.opened .bg-floral{opacity:0;}
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center; /* default */
+  object-position:center;
   border-radius:12px;
   box-shadow:0 3px 8px rgba(0,0,0,0.1);
   transition:transform .25s ease, box-shadow .25s ease;
 }
-.collage img.face{ /* caras visibles y más chicas */
-  object-position:center top;
-  grid-column:auto !important;
-  grid-row:auto !important;
-}
+.collage img.face{ object-position:center top; grid-column:auto !important; grid-row:auto !important; }
 .collage img:hover{ transform:scale(1.03); box-shadow:0 6px 12px rgba(0,0,0,0.15); }
 .collage .wide{grid-column:span 2;}
 .collage .tall{grid-row:span 2;}
@@ -169,17 +182,10 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:24px 0 12px;}
       <div class="base"></div>
       <div class="flap"></div>
       <div class="paper">
-        <!-- Logo floral centrado y más pequeño -->
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
-          <img src="Logo_Definitivo.png" alt="Monograma M/J" 
-               style="width:160px;max-width:55%;border-radius:50%;margin-bottom:14px;filter:drop-shadow(0 2px 5px rgba(0,0,0,0.1));" />
-          <div style="font-family:'Playfair Display',serif;
-                      color:#CBA979;
-                      font-size:1.1rem;
-                      text-align:center;
-                      letter-spacing:.5px;">
-            Queremos compartir este momento contigo!
-          </div>
+        <!-- Contenido del papel: logo + frase, centrados -->
+        <div class="paper-content">
+          <img id="paperLogo" src="Logo_Definitivo.png" alt="Monograma M/J" />
+          <div class="paper-note">¡Queremos compartir este momento contigo!</div>
         </div>
       </div>
     </div>
@@ -207,7 +213,7 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:24px 0 12px;}
     </div>
   </section>
 
-  <!-- Collage: sin huecos + caras visibles y más chicas -->
+  <!-- Collage -->
   <section class="card fade-in">
     <div class="title">Nuestra historia</div>
     <div class="collage">
@@ -265,7 +271,7 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:24px 0 12px;}
 const body = document.body;
 const env  = document.getElementById('envelope');
 const app  = document.getElementById('app');
-const openBtn = document.getElementById('openBtn');
+const openBtn = document.getElementById('openBtn'); // puede no existir (comentado)
 const paperLogo = document.getElementById('paperLogo');
 
 function scrollToInvite(){
@@ -282,25 +288,39 @@ function openInvite(){
   },800);
 }
 env.addEventListener('click', openInvite);
-openBtn.addEventListener('click', openInvite);
-paperLogo.addEventListener('click', openInvite);
+if (openBtn) openBtn.addEventListener('click', openInvite);
+if (paperLogo) paperLogo.addEventListener('click', openInvite);
 env.addEventListener('keypress', (e)=>{ if(e.key==='Enter'||e.key===' '){ openInvite(); } });
 
-// Countdown (21/03/2026 16:00 CL)
-const targetDate=new Date("2026-03-21T16:00:00-03:00").getTime();
-function updateCountdown(){
-  const now=new Date().getTime();
-  const diff=targetDate-now;
-  if(diff<=0)return;
-  const d=Math.floor(diff/(1000*60*60*24));
-  const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  const m=Math.floor((diff%(1000*60*60))/(1000*60));
-  const s=Math.floor((diff%(1000*60))/1000);
-  dd.textContent=d.toString().padStart(2,'0');
-  hh.textContent=h.toString().padStart(2,'0');
-  mm.textContent=m.toString().padStart(2,'0');
-  ss.textContent=s.toString().padStart(2,'0');
+// ===== Countdown (21/03/2026 16:00 CL) =====
+const ddEl = document.getElementById('dd');
+const hhEl = document.getElementById('hh');
+const mmEl = document.getElementById('mm');
+const ssEl = document.getElementById('ss');
+
+const targetDate = new Date("2026-03-21T16:00:00-03:00").getTime();
+
+function setTiles(d,h,m,s){
+  ddEl.textContent = String(d).padStart(2,'0');
+  hhEl.textContent = String(h).padStart(2,'0');
+  mmEl.textContent = String(m).padStart(2,'0');
+  ssEl.textContent = String(s).padStart(2,'0');
 }
+
+function updateCountdown(){
+  const now = Date.now();
+  let diff = targetDate - now;
+  if (diff <= 0){
+    setTiles(0,0,0,0);
+    return;
+  }
+  const d = Math.floor(diff/(1000*60*60*24)); diff%= (1000*60*60*24);
+  const h = Math.floor(diff/(1000*60*60));     diff%= (1000*60*60);
+  const m = Math.floor(diff/(1000*60));        diff%= (1000*60);
+  const s = Math.floor(diff/1000);
+  setTiles(d,h,m,s);
+}
+updateCountdown();                // primera actualización inmediata
 setInterval(updateCountdown,1000);
 </script>
 </body>
