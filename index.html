@@ -169,11 +169,22 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:24px 0 12px;}
       <div class="base"></div>
       <div class="flap"></div>
       <div class="paper">
-        <!-- Logo con flores (mismo de la segunda parte) -->
-        <img id="paperLogo" class="logo-paper" src="Logo_Definitivo.png" alt="Monograma M/J">
+        <!-- Logo floral centrado y más pequeño -->
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+          <img src="Logo_Definitivo.png" alt="Monograma M/J" 
+               style="width:160px;max-width:55%;border-radius:50%;margin-bottom:14px;filter:drop-shadow(0 2px 5px rgba(0,0,0,0.1));" />
+          <div style="font-family:'Playfair Display',serif;
+                      color:#CBA979;
+                      font-size:1.1rem;
+                      text-align:center;
+                      letter-spacing:.5px;">
+            Queremos compartir este momento contigo!
+          </div>
+        </div>
       </div>
     </div>
-    <button class="btn" id="openBtn">Abrir invitación</button>
+    <!-- Botón comentado (por si lo deseas activar de nuevo) -->
+    <!-- <button class="btn" id="openBtn">Abrir invitación</button> -->
   </div>
 </section>
 
