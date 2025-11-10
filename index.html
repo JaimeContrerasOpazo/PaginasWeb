@@ -71,27 +71,36 @@ body.opened .bg-floral{opacity:0;}
   background:var(--crema);border-radius:12px;display:grid;place-items:center;
   box-shadow:0 10px 20px rgba(0,0,0,.1); padding:2%;
 }
-/* Contenido dentro del papel del sobre */
+
+/* Contenido dentro del papel del sobre (RESPONSIVE + SIEMPRE DENTRO) */
 .paper-content{
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
+  display:grid;
+  place-items:center;
   text-align:center;
-  padding:8px 6px;
-  width:100%;height:100%;
+  width:100%;
+  height:100%;
+  padding:clamp(8px,2.5vmin,18px);
+  overflow:hidden;            /* evita desborde fuera del área blanca */
+}
+.paper-inner{
+  max-width:min(85%,520px);
+  width:100%;
 }
 .paper-content img{
-  /* AJUSTE: logo un poco más pequeño y armónico */
   width:min(36vmin,180px);
   border-radius:50%;
-  margin-bottom:12px;
+  margin:0 auto 10px auto;
+  display:block;
   filter:drop-shadow(0 2px 5px rgba(0,0,0,.1));
 }
 .paper-note{
-  /* AJUSTE: tipografía caligráfica elegante */
   font-family:'Great Vibes',cursive;
   color:var(--dorado);
   font-size:clamp(1.2rem,3.2vw,1.6rem);
-  line-height:1.1;
+  line-height:1.15;
+  word-break:break-word;
+  overflow-wrap:break-word;
+  margin:0 auto;
 }
 
 /* Animaciones de apertura */
@@ -127,7 +136,7 @@ body.opened .bg-floral{opacity:0;}
 .hero .btn{ padding:8px 12px; font-size:.82rem; border-radius:999px; box-shadow:0 3px 8px rgba(0,0,0,.13); }
 @media (max-width:480px){ .hero .btn{padding:7px 11px;font-size:.8rem;} .countdown .tile{width:60px;height:60px;} .countdown .num{font-size:1.2rem;} }
 
-/* Collage: compacto, sin huecos (módulo más chico) */
+/* Collage */
 .collage{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
@@ -182,10 +191,12 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:24px 0 12px;}
       <div class="base"></div>
       <div class="flap"></div>
       <div class="paper">
-        <!-- Contenido del papel: logo + frase, centrados -->
+        <!-- Contenido del papel: logo + frase, centrados y contenidos -->
         <div class="paper-content">
-          <img id="paperLogo" src="Logo_Definitivo.png" alt="Monograma M/J" />
-          <div class="paper-note">¡Queremos compartir este momento contigo!</div>
+          <div class="paper-inner">
+            <img id="paperLogo" src="Logo_Definitivo.png" alt="Monograma M/J" />
+            <div class="paper-note">¡Queremos compartir este momento contigo!</div>
+          </div>
         </div>
       </div>
     </div>
@@ -263,7 +274,8 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:24px 0 12px;}
       <a class="btn" href="https://novios.falabella.com/info-evento/evento?codigoEvento=2100121" target="_blank" rel="noopener">
         Ver lista
       </a>
-      <a class="btn" href="Datos_regalo_Mica_Jaime.pdf" download>
+      <!-- Abre el PDF en nueva pestaña -->
+      <a class="btn" href="Datos_regalo_Mica_Jaime.pdf" target="_blank" rel="noopener">
         Datos bancarios
       </a>
     </div>
@@ -332,7 +344,7 @@ function updateCountdown(){
   const s = Math.floor(diff/1000);
   setTiles(d,h,m,s);
 }
-updateCountdown();                // primera actualización inmediata
+updateCountdown();
 setInterval(updateCountdown,1000);
 </script>
 </body>
