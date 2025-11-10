@@ -8,7 +8,7 @@
   <meta property="og:title" content="Mica & Jaime — Invitación" />
   <meta property="og:description" content="Sábado 21 de marzo de 2026 · Casona Macul, Santiago. ¡Reserva la fecha!" />
   <meta property="og:type" content="website" />
-  <!-- Si quieres que la vista previa muestre el logo: -->
+  <!-- Vista previa con logo transparente -->
   <meta property="og:image" content="Logo_Sobre_transparente.png" />
   <meta name="theme-color" content="#6D745C" />
   <meta name="theme-color-2" content="#C46E58" />
@@ -33,21 +33,24 @@
     /* ====== PARTE 1: Sobre animado ====== */
     .intro{ min-height:100dvh; display:grid; place-items:center; padding:24px; padding-top:calc(24px + var(--safe-top)); position:relative; }
     .intro:before{ content:""; position:absolute; inset:0; background:url('Fondo_Invite.png') center/cover no-repeat;  opacity:.50; pointer-events:none; }
-    .envelope-area{ display:grid; place-items:center; gap:14px; position:relative; text-align:center; z-index:1; }
-    .envelope{ position:relative; width:min(520px, 90vw); aspect-ratio: 4/3; cursor:pointer; }
+    .envelope-area{ display:grid; place-items:center; gap:14px; position:relative; text-align:center; z-index:1; width:100%; }
+    .envelope{ position:relative; width:min(520px, 92vw); aspect-ratio: 4/3; cursor:pointer; }
     .envelope .base{ position:absolute; inset:0; background:var(--dorado); border-radius: 14px; box-shadow: 0 14px 34px rgba(0,0,0,.16); }
     .envelope .flap{ position:absolute; inset:0 0 50% 0; background:linear-gradient(to bottom, #bfa165, var(--dorado)); clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform .9s cubic-bezier(.19,1,.22,1); border-top-left-radius:14px; border-top-right-radius:14px; }
     .envelope .paper{ position:absolute; left:6%; right:6%; bottom:6%; top: 30%; background:#CBA979; border-radius:12px; box-shadow: 0 10px 20px rgba(0,0,0,.10); display:grid; place-items:center; padding:18px; text-align:center; }
-    /* LOGO del sobre (PNG transparente) */
+    /* LOGO PNG transparente + mezcla para integrarse al papel */
     .envelope .paper .logo{
-      max-width:60%; height:auto; opacity:.98;
-      mix-blend-mode:multiply; /* ayuda a integrarlo con el papel */
-      filter:drop-shadow(0 2px 3px rgba(0,0,0,.08));
+      max-width: clamp(180px, 60%, 320px);
+      height:auto;
+      opacity:.98;
+      mix-blend-mode:multiply; /* integra el dorado sobre el papel */
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,.08));
       display:block; margin:0 auto;
+      image-rendering: -webkit-optimize-contrast;
     }
     .envelope.open .flap{ transform: rotateX(180deg); }
     .envelope.open .paper{ transform: translateY(-26%); transition: transform .6s ease; }
-    .paper .note{ margin-top:10px; font-family:'Great Vibes',cursive; font-size:2.0rem; color:var(--verde); }
+    .paper .note{ margin-top:10px; font-family:'Great Vibes',cursive; font-size:clamp(1.4rem, 2.2vw, 2.0rem); color:var(--verde); }
 
     .intro .btn{ appearance:none; border:none; background:linear-gradient(to bottom right, var(--cobre), var(--terracota)); color:#fff; padding:14px 18px; border-radius:999px; font-weight:700; letter-spacing:.02em; box-shadow:0 6px 14px rgba(0,0,0,.12); min-height:48px; cursor:pointer }
     .intro .hint{ color:var(--muted); font-size:.9rem; text-align:center }
@@ -89,7 +92,7 @@
     footer{ text-align:center; font-size:.9rem; opacity:.75; margin:24px 0 12px; }
     .env-floral{ position:absolute; right:10px; top:10px; width:min(160px,34vw); transform:rotate(2deg); opacity:.95; filter:drop-shadow(0 6px 12px rgba(0,0,0,.12)); pointer-events:none; }
 
-    /* ====== Collage de fotos ====== */
+    /* ====== Collage de fotos (mejorado) ====== */
     .collage {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -97,8 +100,12 @@
       gap: 12px;
     }
     .collage img {
-      width: 100%; height: 100%; object-fit: cover;
-      border-radius: 12px; box-shadow: 0 8px 18px rgba(0,0,0,0.12); display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+      display: block;
     }
     .collage img.big  { grid-column: span 2; grid-row: span 2; }
     .collage img.tall { grid-row: span 2; }
@@ -106,9 +113,18 @@
     .collage img:hover { transform: translateY(-2px); transition: transform .2s ease; }
     @media (max-width: 680px) {
       .collage { grid-auto-rows: 140px; }
-      .collage img.big, .collage img.tall, .collage img.wide { grid-column: span 1; grid-row: span 1; }
+      .collage img.big,
+      .collage img.tall,
+      .collage img.wide { grid-column: span 1; grid-row: span 1; }
     }
-    @media (min-width: 1100px) { .collage { grid-auto-rows: 220px; } }
+    @media (min-width: 1100px) {
+      .collage { grid-auto-rows: 220px; }
+    }
+
+    /* Accesibilidad y mejoras responsivas */
+    @media (prefers-reduced-motion: reduce) {
+      .envelope .flap, .envelope .paper, .fade-in { transition: none !important; animation: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -119,7 +135,7 @@
         <div class="base"></div>
         <div class="flap"></div>
         <div class="paper">
-          <!-- AQUÍ VA EL LOGO PNG TRANSPARENTE -->
+          <!-- Usa el PNG transparente -->
           <img class="logo" src="Logo_Sobre_transparente.png" alt="Monograma M/J" />
         </div>
       </div>
@@ -157,7 +173,7 @@
       </div>
     </section>
 
-    <!-- Collage -->
+    <!-- Foto dentro del cuerpo -->
     <section class="block">
       <div class="card collage">
         <img src="IMG_8695.JPG"    alt="Mica y Jaime" class="big"  loading="lazy"/>
@@ -166,7 +182,7 @@
         <img src="San_Andre.JPEG"  alt="Mica y Jaime" class="tall"  loading="lazy"/>
         <img src="MATRI.png"       alt="Mica y Jaime" class="big"  loading="lazy"/>
         <img src="QUILLON.png"     alt="Mica y Jaime"            loading="lazy"/>
-        <img src="Foto_reemplazo.png" alt="Mica y Jaime" loading="lazy"/>
+        <img src="Foto_reemplazo.png"     alt="Mica y Jaime"            loading="lazy"/>
         <img src="RIO_TIGRE.JPEG"  alt="Mica y Jaime" class="tall" loading="lazy"/>
         <img src="LAPA.png"        alt="Mica y Jaime" class="big" loading="lazy"/>
         <img src="coliumo.JPEG"    alt="Mica y Jaime" class="tall" loading="lazy"/>
