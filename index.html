@@ -72,17 +72,19 @@ body.opened .bg-floral{opacity:0;}
   box-shadow:0 10px 20px rgba(0,0,0,.1); padding:2%;
 }
 
-/* ===== Monograma sin “fondo raro”: máscara CSS ===== */
+/* ===== Monograma sin “fondo ajedrez”: máscara CSS con fallback ===== */
 .seal{
   width:min(60%,480px); aspect-ratio:1/1;
   background:var(--dorado);
-  /* fallback si no hay mask: muestra el PNG como bg */
-  background-image:url('Logo_Sobre_transparente.png');
-  background-repeat:no-repeat; background-position:center; background-size:contain;
+  /* fallback visual si no hay mask: nada (lo oculta .no-mask) */
+  display:block;
 }
-@supports (mask-image: url("")) {
+.seal-fallback{
+  width:min(60%,480px); aspect-ratio:1/1;
+  display:none; /* solo se muestra con .no-mask */
+}
+@supports (-webkit-mask-image: url("")) or (mask-image: url("")){
   .seal{
-    background-image:none;
     -webkit-mask-image:url('Logo_Sobre_transparente.png');
     mask-image:url('Logo_Sobre_transparente.png');
     -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
@@ -90,7 +92,11 @@ body.opened .bg-floral{opacity:0;}
     -webkit-mask-size:contain;     mask-size:contain;
   }
 }
+/* Si el navegador NO soporta máscaras, usamos la imagen PNG transparente */
+body.no-mask .seal{display:none;}
+body.no-mask .seal-fallback{display:block;}
 
+/* Animaciones de apertura */
 .envelope.open .flap{transform:rotateX(180deg);}
 .envelope.open .paper{transform:translateY(-25%);transition:transform 1s ease;}
 
@@ -137,10 +143,12 @@ body.opened .bg-floral{opacity:0;}
   width:100%;
   height:100%;
   object-fit:cover;
+  object-position:center; /* default */
   border-radius:12px;
   box-shadow:0 3px 8px rgba(0,0,0,0.1);
   transition:transform .25s ease, box-shadow .25s ease;
 }
+.collage img.obj-top{ object-position:center top; } /* PARA mostrar la parte alta */
 .collage img:hover{ transform:scale(1.03); box-shadow:0 6px 12px rgba(0,0,0,0.15); }
 .collage .wide{grid-column:span 2;}
 .collage .tall{grid-row:span 2;}
@@ -177,9 +185,9 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:24px 0 12px;}
       <div class="base"></div>
       <div class="flap"></div>
       <div class="paper">
-        <!-- Monograma sin “cuadritos” -->
+        <!-- Monograma: máscara dorada + fallback PNG transparente -->
         <div class="seal" id="seal" title="Abrir invitación"></div>
-        <noscript><img class="logo" src="Logo_Sobre_transparente.png" alt="Monograma M/J"></noscript>
+        <img class="seal-fallback" src="Logo_Definitivo.png" alt="Monograma M/J" />
       </div>
     </div>
     <button class="btn" id="openBtn">Abrir invitación</button>
@@ -205,18 +213,18 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:24px 0 12px;}
     </div>
   </section>
 
-  <!-- Collage rectangular compacto sin huecos -->
+  <!-- Collage: sin huecos + dos fotos con parte alta visible -->
   <section class="card fade-in">
     <div class="title">Nuestra historia</div>
     <div class="collage">
       <img src="IMG_8695.JPG" alt="Mica y Jaime" class="tall" />
       <img src="IMG_8710.JPG" alt="Mica y Jaime" />
-      <img src="Foto_Lima.JPEG" alt="Mica y Jaime" class="wide" />
+      <img src="Foto_Lima.JPEG" alt="Mica y Jaime" class="wide obj-top" />
       <img src="San_Andre.JPEG" alt="Mica y Jaime" />
       <img src="MATRI.png" alt="Mica y Jaime" class="big" />
       <img src="QUILLON.png" alt="Mica y Jaime" />
       <img src="Foto_reemplazo.png" alt="Mica y Jaime" />
-      <img src="RIO_TIGRE.JPEG" alt="Mica y Jaime" class="wide" />
+      <img src="RIO_TIGRE.JPEG" alt="Mica y Jaime" class="wide obj-top" />
       <img src="LAPA.png" alt="Mica y Jaime" />
       <img src="coliumo.JPEG" alt="Mica y Jaime" />
     </div>
@@ -265,6 +273,10 @@ const env  = document.getElementById('envelope');
 const app  = document.getElementById('app');
 const openBtn = document.getElementById('openBtn');
 const seal = document.getElementById('seal');
+
+/* Soporte de máscaras: si no hay, usa PNG transparente como fallback */
+const supportsMask = CSS.supports('(-webkit-mask-image: url(""))') || CSS.supports('(mask-image: url(""))');
+if(!supportsMask){ body.classList.add('no-mask'); }
 
 function scrollToInvite(){
   document.getElementById('hero').scrollIntoView({behavior:'smooth', block:'start'});
