@@ -128,12 +128,36 @@
         <div class="base"></div>
         <div class="flap"></div>
         <div class="paper">
-          <img 
-  class="logo" 
-  src="Logo_Sobre_transparente.png" 
-  alt="Monograma M/J" 
-  style="background: transparent; mix-blend-mode: multiply; display: block; margin: 0 auto; max-width: 60%; height: auto; opacity: .95;" 
-/>
+          <!-- Monograma inline SVG, fondo completamente transparente -->
+<svg class="logo" viewBox="0 0 512 512" aria-label="Monograma M/J" role="img"
+     style="display:block;margin:0 auto;max-width:60%;height:auto;">
+  <defs>
+    <style>
+      .gold { fill:#CBA979; stroke:#CBA979; }
+      .gold-stroke { fill:none; stroke:#CBA979; stroke-width:16; stroke-linecap:round; stroke-linejoin:round; }
+      .gold-thin { fill:none; stroke:#CBA979; stroke-width:10; stroke-linecap:round; stroke-linejoin:round; }
+      .gold-text { fill:#CBA979; font-family: 'Playfair Display', serif; font-weight:700; }
+    </style>
+  </defs>
+  <!-- Círculo -->
+  <circle class="gold-stroke" cx="256" cy="256" r="200"/>
+  <!-- Diagonal -->
+  <line class="gold-thin" x1="160" y1="320" x2="336" y2="192"/>
+  <!-- Letras -->
+  <text class="gold-text" x="170" y="240" font-size="140">J</text>
+  <text class="gold-text" x="260" y="320" font-size="140">M</text>
+  <!-- Ramas botánicas -->
+  <g class="gold-thin">
+    <path d="M310,350 C370,350 420,370 460,392"/>
+    <path d="M330,350 C380,360 410,330 440,320"/>
+    <path d="M340,380 C380,400 410,420 440,440"/>
+    <circle class="gold" cx="458" cy="392" r="6"/>
+    <circle class="gold" cx="438" cy="320" r="6"/>
+    <circle class="gold" cx="440" cy="440" r="6"/>
+    <path d="M392,356 c12,-18 20,-26 36,-34"/>
+    <path d="M392,388 c12,-18 22,-28 40,-36"/>
+  </g>
+</svg>
         </div>
       </div>
       <button class="btn" id="openBtn">Abrir invitación</button>
