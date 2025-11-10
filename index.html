@@ -25,14 +25,15 @@ html,body{
   color:var(--text);
   font-family:'Montserrat',sans-serif;
   overflow-x:hidden;
+  scroll-behavior:smooth;
 }
 a{text-decoration:none;color:inherit;}
 img{max-width:100%;height:auto;}
+.hidden{display:none;}
 .fade-in{opacity:0;animation:fadeIn 1.6s ease forwards;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:none;}}
-.hidden{display:none;}
 
-/* Overlay de fondo floral para crossfade */
+/* Fondo floral crossfade */
 .bg-floral{
   position:fixed; inset:0;
   background:url('floral-sobre.png') center/cover no-repeat;
@@ -47,22 +48,49 @@ body.opened .bg-floral{opacity:0;}
   color:#fff;border:none;padding:10px 16px;border-radius:999px;
   font-weight:600;font-size:.9rem;
   box-shadow:0 4px 10px rgba(0,0,0,.15);
-  cursor:pointer;transition:all .3s ease;letter-spacing:.02em;
-  margin:5px;
+  cursor:pointer;transition:all .3s ease;letter-spacing:.02em;margin:5px;
 }
-.btn:hover{
-  box-shadow:0 0 14px 3px rgba(203,169,121,0.45);
-  transform:translateY(-1px);
-}
+.btn:hover{ box-shadow:0 0 14px 3px rgba(203,169,121,0.45); transform:translateY(-1px); }
 
-/* === SOBRE (intro) — sin fondo propio (lo maneja .bg-floral) === */
-.intro{min-height:100dvh;display:grid;place-items:center;position:relative;z-index:1;}
+/* ===== SOBRE (Intro) ocupa la pantalla ===== */
+.intro{
+  min-height:100svh;
+  display:grid;place-items:center;position:relative;z-index:1;
+}
 .envelope-area{display:grid;place-items:center;gap:16px;z-index:2;}
-.envelope{position:relative;width:min(520px,90vw);aspect-ratio:4/3;cursor:pointer;perspective:1000px;}
+.envelope{
+  position:relative;
+  width:min(96vmin,980px);
+  aspect-ratio:16/10;
+  cursor:pointer;perspective:1000px;
+}
 .envelope .base{position:absolute;inset:0;background:var(--dorado);border-radius:14px;box-shadow:0 14px 34px rgba(0,0,0,.16);}
 .envelope .flap{position:absolute;inset:0 0 50% 0;background:linear-gradient(to bottom,#cfae6f,var(--dorado));clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform 1s cubic-bezier(.19,1,.22,1);}
-.envelope .paper{position:absolute;left:6%;right:6%;bottom:6%;top:30%;background:var(--crema);border-radius:12px;display:grid;place-items:center;box-shadow:0 10px 20px rgba(0,0,0,.1);}
-.paper .logo{max-width:60%;opacity:.95;mix-blend-mode:multiply;}
+.envelope .paper{
+  position:absolute;left:6%;right:6%;bottom:6%;top:30%;
+  background:var(--crema);border-radius:12px;display:grid;place-items:center;
+  box-shadow:0 10px 20px rgba(0,0,0,.1); padding:2%;
+}
+
+/* ===== Monograma sin “fondo raro”: máscara CSS ===== */
+.seal{
+  width:min(60%,480px); aspect-ratio:1/1;
+  background:var(--dorado);
+  /* fallback si no hay mask: muestra el PNG como bg */
+  background-image:url('Logo_Sobre_transparente.png');
+  background-repeat:no-repeat; background-position:center; background-size:contain;
+}
+@supports (mask-image: url("")) {
+  .seal{
+    background-image:none;
+    -webkit-mask-image:url('Logo_Sobre_transparente.png');
+    mask-image:url('Logo_Sobre_transparente.png');
+    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+    -webkit-mask-position:center;  mask-position:center;
+    -webkit-mask-size:contain;     mask-size:contain;
+  }
+}
+
 .envelope.open .flap{transform:rotateX(180deg);}
 .envelope.open .paper{transform:translateY(-25%);transition:transform 1s ease;}
 
@@ -79,7 +107,7 @@ body.opened .bg-floral{opacity:0;}
 }
 .title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3.5vw,2rem);color:var(--dorado);margin-bottom:.4rem;}
 
-/* === HERO como CARD === */
+/* HERO como CARD */
 .hero{color:var(--verde);}
 .hero .script{font-family:'Great Vibes',cursive;font-size:2.2rem;color:var(--cobre);}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,6vw,3.2rem);color:var(--dorado);margin:.4rem 0;}
@@ -87,52 +115,38 @@ body.opened .bg-floral{opacity:0;}
 .hero .monogram img{width:140px;margin:1.2rem auto;filter:drop-shadow(0 3px 4px rgba(0,0,0,.1));}
 
 /* Countdown */
-.countdown{
-  display:flex;justify-content:center;gap:12px;
-  margin:0.8rem auto 1rem;flex-wrap:wrap;
-}
-.countdown .tile{
-  background:var(--crema);border:1px solid var(--dorado);
-  border-radius:12px;width:64px;height:64px;
-  display:flex;flex-direction:column;justify-content:center;align-items:center;
-  box-shadow:0 4px 10px rgba(0,0,0,.08);
-}
+.countdown{ display:flex;justify-content:center;gap:12px; margin:0.8rem auto 1rem;flex-wrap:wrap; }
+.countdown .tile{ background:var(--crema);border:1px solid var(--dorado);border-radius:12px;width:64px;height:64px;display:flex;flex-direction:column;justify-content:center;align-items:center;box-shadow:0 4px 10px rgba(0,0,0,.08); }
 .countdown .num{font-size:1.3rem;font-weight:700;color:var(--dorado);}
 .countdown .lab{font-size:.75rem;color:var(--verde);}
-
-/* Botones más PEQUEÑOS solo en el HERO */
+/* Botones más pequeños SOLO en el hero */
 .hero .actions{margin-top:.6rem;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;}
-.hero .btn{
-  padding:8px 12px;
-  font-size:.82rem;
-  border-radius:999px;
-  box-shadow:0 3px 8px rgba(0,0,0,.13);
-}
-@media (max-width:480px){
-  .hero .btn{padding:7px 11px;font-size:.8rem;}
-  .countdown .tile{width:60px;height:60px;}
-  .countdown .num{font-size:1.2rem;}
-}
+.hero .btn{ padding:8px 12px; font-size:.82rem; border-radius:999px; box-shadow:0 3px 8px rgba(0,0,0,.13); }
+@media (max-width:480px){ .hero .btn{padding:7px 11px;font-size:.8rem;} .countdown .tile{width:60px;height:60px;} .countdown .num{font-size:1.2rem;} }
 
-/* Collage SOLO rectángulos/cuadrados, compacto */
+/* Collage: compacto, sin huecos */
 .collage{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:10px; margin-top:1.5rem;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  grid-auto-rows:160px;
+  grid-auto-flow:dense;
+  gap:6px;
+  margin-top:1.5rem;
 }
 .collage img{
-  width:100%; height:auto; object-fit:cover;
+  width:100%;
+  height:100%;
+  object-fit:cover;
   border-radius:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  box-shadow:0 3px 8px rgba(0,0,0,0.1);
   transition:transform .25s ease, box-shadow .25s ease;
 }
-.collage img:hover{transform:scale(1.03);box-shadow:0 6px 14px rgba(0,0,0,0.15);}
+.collage img:hover{ transform:scale(1.03); box-shadow:0 6px 12px rgba(0,0,0,0.15); }
 .collage .wide{grid-column:span 2;}
 .collage .tall{grid-row:span 2;}
 .collage .big{grid-column:span 2;grid-row:span 2;}
 @media(max-width:700px){
-  .collage{grid-template-columns:repeat(2,1fr);}
-  .collage .wide{grid-column:span 2;}
+  .collage{grid-template-columns:repeat(2,1fr);grid-auto-rows:120px;}
   .collage .big{grid-column:span 2;grid-row:span 2;}
 }
 
@@ -160,16 +174,21 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:24px 0 12px;}
 <section class="intro">
   <div class="envelope-area">
     <div id="envelope" class="envelope" tabindex="0" aria-label="Abrir invitación">
-      <div class="base"></div><div class="flap"></div>
-      <div class="paper"><img class="logo" src="Logo_Sobre_transparente.png" alt="Monograma M/J"></div>
+      <div class="base"></div>
+      <div class="flap"></div>
+      <div class="paper">
+        <!-- Monograma sin “cuadritos” -->
+        <div class="seal" id="seal" title="Abrir invitación"></div>
+        <noscript><img class="logo" src="Logo_Sobre_transparente.png" alt="Monograma M/J"></noscript>
+      </div>
     </div>
     <button class="btn" id="openBtn">Abrir invitación</button>
   </div>
 </section>
 
 <main id="app" class="wrap hidden">
-  <!-- HERO ahora es un CARD -->
-  <section class="card hero fade-in">
+  <!-- HERO como CARD -->
+  <section class="card hero fade-in" id="hero">
     <div class="script">¡Nos casamos!</div>
     <h1>Mica & Jaime</h1>
     <div class="date">Sábado 21 de marzo de 2026 · Casona Macul, Santiago</div>
@@ -186,7 +205,7 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:24px 0 12px;}
     </div>
   </section>
 
-  <!-- Collage compacto (solo rectángulos/cuadrados) -->
+  <!-- Collage rectangular compacto sin huecos -->
   <section class="card fade-in">
     <div class="title">Nuestra historia</div>
     <div class="collage">
@@ -241,22 +260,31 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:24px 0 12px;}
 </main>
 
 <script>
-const env=document.getElementById('envelope');
-const app=document.getElementById('app');
-const openBtn=document.getElementById('openBtn');
+const body = document.body;
+const env  = document.getElementById('envelope');
+const app  = document.getElementById('app');
+const openBtn = document.getElementById('openBtn');
+const seal = document.getElementById('seal');
+
+function scrollToInvite(){
+  document.getElementById('hero').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
 function openInvite(){
   env.classList.add('open');
-  // Crossfade del fondo floral
-  document.body.classList.add('opened');
+  body.classList.add('opened'); // crossfade del fondo floral
   setTimeout(()=>{
     app.classList.remove('hidden');
     const cards=document.querySelectorAll('.card,.hero,footer');
     cards.forEach((c,i)=>{c.style.animationDelay=(i*0.3)+'s';});
+    scrollToInvite(); // auto scroll suave
   },800);
 }
-env.addEventListener('click',openInvite);
-openBtn.addEventListener('click',openInvite);
-env.addEventListener('keypress',(e)=>{if(e.key==='Enter'||e.key===' '){openInvite();}});
+
+env.addEventListener('click', openInvite);
+openBtn.addEventListener('click', openInvite);
+seal.addEventListener('click', openInvite);
+env.addEventListener('keypress', (e)=>{ if(e.key==='Enter'||e.key===' '){ openInvite(); } });
 
 // Countdown (21/03/2026 16:00 CL)
 const targetDate=new Date("2026-03-21T16:00:00-03:00").getTime();
