@@ -42,13 +42,13 @@ img{max-width:100%;height:auto;}
 }
 body.opened .bg-floral{opacity:0;}
 
-/* Botones (generales) */
+/* Botones (generales) — levemente más pequeños */
 .btn{
   background:linear-gradient(to bottom right,var(--dorado),var(--terracota));
-  color:#fff;border:none;padding:10px 16px;border-radius:999px;
-  font-weight:600;font-size:.9rem;
+  color:#fff;border:none;padding:9px 14px;border-radius:999px;
+  font-weight:600;font-size:.85rem;
   box-shadow:0 4px 10px rgba(0,0,0,.15);
-  cursor:pointer;transition:all .3s ease;letter-spacing:.02em;margin:5px;
+  cursor:pointer;transition:all .3s ease;letter-spacing:.01em;margin:5px;
 }
 .btn:hover{ box-shadow:0 0 14px 3px rgba(203,169,121,0.45); transform:translateY(-1px); }
 
@@ -93,7 +93,7 @@ body.opened .bg-floral{opacity:0;}
 }
 .paper-note{
   font-family:'Great Vibes',cursive;color:var(--dorado);
-  font-size:clamp(1.1rem,3.2vw,1.6rem);line-height:1.15;
+  font-size:clamp(1.05rem,3vw,1.5rem);line-height:1.15;
 }
 
 /* Animación apertura */
@@ -107,8 +107,9 @@ body.opened .bg-floral{opacity:0;}
     left:7%; right:7%;
     top:38%; bottom:8%;                 /* baja un poco el papel y deja espacio */
   }
-  .paper-content img{ width:min(28vmin,136px); }
-  .paper-note{ font-size:1rem; }
+  .paper-content img{ width:min(28vmin,132px); }
+  .paper-note{ font-size:.98rem; }
+  .btn{ font-size:.8rem; padding:8px 12px; }
 }
 
 /* Cards contenedor */
@@ -119,28 +120,33 @@ body.opened .bg-floral{opacity:0;}
   border-radius:18px;
   box-shadow:0 6px 18px rgba(0,0,0,.1);
   text-align:center;
-  padding:clamp(18px,4vw,28px);
+  padding:clamp(18px,4vw,26px);
   margin:26px auto;
 }
 .wrap > .card:last-of-type{margin-bottom:16px;} /* elimina espacio extra en desktop */
-.title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3.5vw,2rem);color:var(--dorado);margin-bottom:.4rem;}
+.title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3.3vw,1.9rem);color:var(--dorado);margin-bottom:.4rem;}
 
 /* HERO como CARD */
 #hero{ scroll-margin-top:14px; } /* que no quede “cortado” al llegar por scroll */
 .hero{color:var(--verde);}
-.hero .script{font-family:'Great Vibes',cursive;font-size:2.2rem;color:var(--cobre);}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,6vw,3.2rem);color:var(--dorado);margin:.4rem 0;}
-.hero .date{font-size:1.1rem;margin-bottom:1.2rem;color:var(--verde);}
-.hero .monogram img{width:140px;margin:1.2rem auto;filter:drop-shadow(0 3px 4px rgba(0,0,0,.1));}
+.hero .script{font-family:'Great Vibes',cursive;font-size:2rem;color:var(--cobre);}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5.5vw,3rem);color:var(--dorado);margin:.35rem 0;}
+.hero .date{font-size:1rem;margin-bottom:1rem;color:var(--verde);}
+.hero .monogram img{width:136px;margin:1rem auto;filter:drop-shadow(0 3px 4px rgba(0,0,0,.1));}
 
-/* Countdown + botones chicos */
-.countdown{ display:flex;justify-content:center;gap:12px; margin:0.8rem auto 1rem;flex-wrap:wrap; }
-.countdown .tile{ background:var(--crema);border:1px solid var(--dorado);border-radius:12px;width:64px;height:64px;display:flex;flex-direction:column;justify-content:center;align-items:center;box-shadow:0 4px 10px rgba(0,0,0,.08); }
-.countdown .num{font-size:1.3rem;font-weight:700;color:var(--dorado);}
-.countdown .lab{font-size:.75rem;color:var(--verde);}
-.hero .actions{margin-top:.6rem;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;}
-.hero .btn{ padding:8px 12px; font-size:.82rem; border-radius:999px; box-shadow:0 3px 8px rgba(0,0,0,.13); }
-@media (max-width:480px){ .hero .btn{padding:7px 11px;font-size:.8rem;} .countdown .tile{width:60px;height:60px;} .countdown .num{font-size:1.2rem;} }
+/* Countdown + botones chicos — más compacto */
+.countdown{ display:flex;justify-content:center;gap:10px; margin:.7rem auto .9rem;flex-wrap:wrap; }
+.countdown .tile{ background:var(--crema);border:1px solid var(--dorado);border-radius:12px;width:58px;height:58px;display:flex;flex-direction:column;justify-content:center;align-items:center;box-shadow:0 4px 10px rgba(0,0,0,.08); }
+.countdown .num{font-size:1.15rem;font-weight:700;color:var(--dorado);}
+.countdown .lab{font-size:.72rem;color:var(--verde);}
+.hero .actions{margin-top:.5rem;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;}
+.hero .btn{ padding:7px 12px; font-size:.8rem; box-shadow:0 3px 8px rgba(0,0,0,.13); }
+@media (max-width:480px){
+  .countdown .tile{width:54px;height:54px;}
+  .countdown .num{font-size:1.05rem;}
+  .countdown .lab{font-size:.68rem;}
+  .hero .btn{padding:7px 10px;font-size:.78rem;}
+}
 
 /* Collage */
 .collage{
@@ -188,7 +194,7 @@ body.opened .bg-floral{opacity:0;}
 .swatch .chip{width:38px;height:38px;border-radius:50%;box-shadow:0 2px 5px rgba(0,0,0,.08);border:1px solid #d8d0c3;}
 @media(max-width:600px){.dresscode .color-restrictions{gap:20px;}.dresscode .circle{width:36px;height:36px;} .swatch{min-width:84px;}}
 
-/* Texto bajo Playlist */
+/* Texto auxiliar dorado/cobre */
 .playlist-note{
   margin-top:.5rem;
   font-family:'Playfair Display',serif;
@@ -202,12 +208,6 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:18px 0 10px;}
 </head>
 <body>
 
-
-
-
-
-
-  
 <!-- Fondo floral que se desvanece al abrir -->
 <div class="bg-floral"></div>
 
@@ -217,9 +217,9 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:18px 0 10px;}
       <div class="base"></div>
       <div class="flap"></div>
       <div class="paper">
-        <!-- Contenido del papel: logo + frase, centrados -->
+        <!-- Contenido del papel: broche + frase, centrados -->
         <div class="paper-content">
-          <img id="paperLogo" src="Logo_Definitivo.png" alt="Monograma M/J" />
+          <img id="paperLogo" src="Broche.png" alt="Broche M·J" />
           <div class="paper-note">¡Queremos compartir este momento contigo!</div>
         </div>
       </div>
@@ -265,6 +265,7 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:18px 0 10px;}
     </div>
   </section>
 
+  <!-- Itinerario -->
   <section class="card itinerary fade-in">
     <div class="title">Itinerario</div>
     <ul class="timeline">
@@ -275,11 +276,10 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:18px 0 10px;}
     </ul>
   </section>
 
+  <!-- Dresscode -->
   <section class="card dresscode fade-in">
     <div class="title">Código de vestimenta 👔✨</div>
     <p>Formal elegante 🌹 — Gala o semi gala.<br>Evita los colores reservados:</p>
-
-    <div class="color-restrictions"></div>
 
     <div class="title" style="font-size:1.3rem;margin-top:.6rem;color:var(--verde)">Tonos reservados corbata novio</div>
     <div class="swatches">
@@ -302,50 +302,57 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:18px 0 10px;}
     <p style="opacity:.85;font-size:.95rem;margin-top:.6rem;">(El tono claro se reserva para la novia, y el burdeo en corbata para el novio 💒)</p>
   </section>
 
+  <!-- Solo adultos (sección propia) -->
+  <section class="card fade-in">
+    <div class="title">Solo adultos 🕺💃</div>
+    <div class="playlist-note">Para que todos puedan disfrutar al máximo, la celebración es <strong>solo para adultos</strong>.</div>
+  </section>
 
-    </section>
-
-  <section class="card fade-in"><div class="title">Solo Adultos <p>🕺 💃</p> </div>
-  <div class="playlist-note">Para que todos puedan disfrutar al máximo, esta invitación es solo para adultos.
-  <a class="btn" href="
-    
-
+  <!-- Lista de regalos (sección propia) -->
   <section class="card fade-in">
     <div class="title">Lista de regalos 🎁</div>
-    <div class="playlist-note">Tu presencia es lo más importante, pero si quieres tener un detalle, aquí encontrarás nuestra lista de deseos o nuestra cuenta</div>
+    <div class="playlist-note">Tu presencia es lo más importante, pero si quieres tener un detalle, aquí encontrarás nuestra lista o nuestros datos.</div>
     <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:.4rem;">
-      <a class="btn" href="https://novios.falabella.com/info-evento/evento?codigoEvento=2100121" 
-         target="_blank" rel="noopener">Ver lista</a>
-      <!-- Abre el PDF en una nueva pestaña -->
+      <a class="btn" href="https://novios.falabella.com/info-evento/evento?codigoEvento=2100121" target="_blank" rel="noopener">Ver lista</a>
       <a class="btn" href="Datos_regalo_Mica_Jaime.pdf" target="_blank" rel="noopener">Datos bancarios</a>
     </div>
   </section>
 
+  <!-- Playlist -->
   <section class="card fade-in">
-    <div class="title">Canción infaltable? 🎵</div>
-    <div class="playlist-note">Comparte la canción que debe estar en la fiesta</div>
+    <div class="title">Canción infaltable 🎵</div>
+    <div class="playlist-note">Comparte la canción que <strong>no debe faltar</strong> en la fiesta.</div>
     <a class="btn" href="https://open.spotify.com/playlist/1yQ3SckD5XpexViWkWlKaM" target="_blank" rel="noopener">Abrir Playlist</a>
-   
   </section>
 
-  <section class="card fade-in"><div class="title">Vendrás? 💌</div>
-  <div class="playlist-note">Por favor confirma tu asistencia. Si te invitamos con pareja, rellena el formulario una vez por tí y otra por tu pareja. Si puedes, ojalá a más tardar un mes antes del evento. ¡Gracias!
-  </div>
-  <a class="btn" href="https://forms.gle/tsauL7QgjHBVs5Ye6" target="_blank" rel="noopener">Confirmar aquí</a>
-  
-  
+  <!-- Confirmación -->
+  <section class="card fade-in">
+    <div class="title">¿Vendrás? 💌</div>
+    <div class="playlist-note">Si te invitamos con pareja, por favor completa el formulario una vez por cada uno. <strong>Plazo Máximo para completar: 21.02.2026</strong> ¡Gracias!</div>
+    <a class="btn" href="https://forms.gle/tsauL7QgjHBVs5Ye6" target="_blank" rel="noopener">Confirmar aquí</a>
   </section>
-  <section class="card fade-in"><div class="title">Dudas o consultas</div>
-  <div class="playlist-note">Haz clic en un botón para escribirnos directo por WhatsApp</div>
-  <a class="btn" href="https://wa.me/56982296127" target="_blank" rel="noopener">WhatsApp Mica</a><a class="btn" href="https://wa.me/56989895843" target="_blank" rel="noopener">WhatsApp Jaime</a></section>
 
-  <section class="card fade-in"><div class="title">Agregar al calendario 📅</div>
-  <div class="playlist-note">SAVE THE DATE! Guarda la fecha en tu calendario (Google, iOS, Outlook)</div>
-  <a class="btn" href="Matri Mica&Jaime - Casona Macul.ics">Agregar al calendario</a></section>
+  <!-- Contacto -->
+  <section class="card fade-in">
+    <div class="title">Dudas o consultas</div>
+    <div class="playlist-note">Haz clic para escribirnos directo por WhatsApp</div>
+    <a class="btn" href="https://wa.me/56982296127" target="_blank" rel="noopener">WhatsApp Mica</a>
+    <a class="btn" href="https://wa.me/56989895843" target="_blank" rel="noopener">WhatsApp Jaime</a>
+  </section>
 
-  <section class="card fade-in"><div class="title">¿Capturaste un momento? 💛📸</div>
-  <div class="playlist-note">Dejanos todos esos momentos que lograste guardar ❤️</div>
-  <a class="btn" href="https://photos.app.goo.gl/pQUvTaAAmQ6N3KvNA" target="_blank" rel="noopener">Sube tus fotos</a></section>
+  <!-- Calendario -->
+  <section class="card fade-in">
+    <div class="title">Agregar al calendario 📅</div>
+    <div class="playlist-note">¡Save the date! (Google, iOS, Outlook)</div>
+    <a class="btn" href="Matri Mica&Jaime - Casona Macul.ics">Agregar al calendario</a>
+  </section>
+
+  <!-- Fotos -->
+  <section class="card fade-in">
+    <div class="title">¿Capturaste un momento? 💛📸</div>
+    <div class="playlist-note">¡Déjanos esos recuerdos que guardaste! ❤️</div>
+    <a class="btn" href="https://photos.app.goo.gl/pQUvTaAAmQ6N3KvNA" target="_blank" rel="noopener">Sube tus fotos</a>
+  </section>
 
   <footer class="fade-in">Con amor, Mica & Jaime · 2025</footer>
 </main>
@@ -370,7 +377,6 @@ function openInvite(){
     app.classList.remove('hidden');
     const cards=document.querySelectorAll('.card,.hero,footer');
     cards.forEach((c,i)=>{c.style.animationDelay=(i*0.3)+'s';});
-    // doble RAF evita “cortes” en móviles al calcular el offset
     requestAnimationFrame(()=>requestAnimationFrame(()=>scrollToInvite()));
   }, 900);
 }
