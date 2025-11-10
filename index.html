@@ -55,7 +55,7 @@ body.opened .bg-floral{opacity:0;}
 /* Separación consistente entre texto y botones */
 .btn-row{
   display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
-  margin-top:26px; /* <<< separación clara con el texto */
+  margin-top:34px; /* separación clara con el texto */
 }
 
 /* ===== SOBRE (Intro) ===== */
@@ -69,36 +69,49 @@ body.opened .bg-floral{opacity:0;}
   width:min(96vmin,980px);
   aspect-ratio:16/10;
   cursor:pointer;perspective:1000px;
+  filter: drop-shadow(0 14px 34px rgba(0,0,0,.16));
 }
+/* base kraft vintage */
 .envelope .base{
-  position:absolute;inset:0;background:var(--dorado);
-  border-radius:14px;box-shadow:0 14px 34px rgba(0,0,0,.16);
+  position:absolute;inset:0;border-radius:16px;
+  background:
+    linear-gradient(to bottom,#caa97a,#b99569 48%,#b99569 52%,#b38e63) /* papel envejecido */;
+}
+.envelope .base::before{ /* textura/grano muy suave */
+  content:"";position:absolute;inset:0;border-radius:16px;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.05), rgba(255,255,255,.05) 2px, transparent 2px, transparent 4px);
+  mix-blend-mode:overlay;opacity:.35;pointer-events:none;
 }
 .envelope .flap{
   position:absolute;inset:0 0 50% 0;
-  background:linear-gradient(to bottom,#cfae6f,var(--dorado));
+  background:linear-gradient(to bottom,#ceb087,#c19b6e 55%,#b58e64);
   clip-path:polygon(0 0,100% 0,50% 100%);
   transform-origin:top;transition:transform 1s cubic-bezier(.19,1,.22,1);
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.12));
 }
 .envelope .paper{
   position:absolute;left:6%;right:6%;bottom:6%;top:30%;
-  background:var(--crema);border-radius:12px;
+  background:var(--crema);border-radius:14px;
   display:grid;place-items:center;
-  box-shadow:0 10px 20px rgba(0,0,0,.1);
+  box-shadow:0 10px 20px rgba(0,0,0,.13);
   padding:2%;
   overflow:hidden;
+  border:1px solid #eadfcd;
 }
 .paper-content{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;gap:10px;width:100%;height:100%;
+  text-align:center;gap:12px;width:100%;height:100%;
 }
 .paper-content img{
   width:min(36vmin,180px);
-  border-radius:50%;filter:drop-shadow(0 2px 5px rgba(0,0,0,.1));
+  border-radius:50%;filter:drop-shadow(0 3px 6px rgba(0,0,0,.18));
 }
 .paper-note{
-  font-family:'Great Vibes',cursive;color:var(--dorado);
-  font-size:clamp(1.05rem,3vw,1.5rem);line-height:1.15;
+  font-family:'Great Vibes',cursive;color:#b07a47;
+  font-size:clamp(1.2rem,3.4vw,1.7rem); /* un poco más grande */
+  line-height:1.18; letter-spacing:.3px;
+  text-shadow:0 1px 0 rgba(255,255,255,.8);
 }
 .envelope.open .flap{transform:rotateX(180deg);}
 .envelope.open .paper{transform:translateY(-25%);transition:transform 1s ease;}
@@ -108,9 +121,9 @@ body.opened .bg-floral{opacity:0;}
   .envelope{ aspect-ratio: 4/3; }
   .envelope .paper{ left:7%; right:7%; top:38%; bottom:8%; }
   .paper-content img{ width:min(28vmin,132px); }
-  .paper-note{ font-size:.98rem; }
+  .paper-note{ font-size:1.1rem; }
   .btn{ font-size:.8rem; padding:8px 12px; }
-  .btn-row{ margin-top:22px; }
+  .btn-row{ margin-top:28px; }
 }
 
 /* Cards contenedor */
@@ -126,6 +139,7 @@ body.opened .bg-floral{opacity:0;}
 }
 .wrap > .card:last-of-type{margin-bottom:16px;}
 .title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3.3vw,1.9rem);color:var(--dorado);margin-bottom:.4rem;}
+.title-emoji{font-size:1.4rem; margin-top:.2rem;}
 
 /* HERO */
 #hero{ scroll-margin-top:14px; }
@@ -193,7 +207,7 @@ body.opened .bg-floral{opacity:0;}
 .map-frame::after{ /* textura/grano ligero */
   content:"";position:absolute;inset:0;
   background:
-    radial-gradient(ellipse at center, rgba(0,0,0,.18), transparent 55%) /* viñeta */,
+    radial-gradient(ellipse at center, rgba(0,0,0,.18), transparent 55%),
     repeating-linear-gradient(0deg, rgba(0,0,0,.03), rgba(0,0,0,.03) 2px, transparent 2px, transparent 4px);
   mix-blend-mode:multiply;pointer-events:none;
 }
@@ -206,8 +220,7 @@ body.opened .bg-floral{opacity:0;}
   box-shadow:0 2px 6px rgba(0,0,0,.12);
 }
 .map-frame .pin{
-  position:absolute; /* AJUSTA estas coordenadas si quieres mover el pin */
-  top:58%; left:62%;
+  position:absolute;top:58%; left:62%;
   transform:translate(-50%,-90%);
   font-size:1.6rem;
   text-shadow:0 1px 3px rgba(0,0,0,.35);
@@ -255,7 +268,8 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:18px 0 10px;}
 
   <!-- Collage -->
   <section class="card fade-in">
-    <div class="title">Parte de Nuestra Historia 🦔💛🐱</div>
+    <div class="title">Parte de Nuestra Historia</div>
+    <div class="title-emoji">🦔 💛 🐱</div>
     <div class="collage">
       <img src="IMG_8695.JPG" alt="Mica y Jaime" class="tall" />
       <img src="IMG_8710.JPG" alt="Mica y Jaime" />
@@ -327,9 +341,8 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:18px 0 10px;}
   <section class="card fade-in">
     <div class="title">Cómo llegar · 🗺️</div>
     <div class="map-frame">
-      <!-- Usa tu captura guardada con este nombre -->
       <img src="mapa_casona_macul.jpg" alt="Mapa vintage Casona Macul" loading="lazy">
-      <div class="label">Av. Las Perdices 5101 -Peñalolen</div>
+      <div class="label">Av. Las Perdices 5101 · Peñalolén</div>
       <div class="pin">📍</div>
     </div>
     <div class="btn-row">
