@@ -61,7 +61,7 @@ body.opened .bg-floral{opacity:0;}
 .envelope{
   position:relative;
   width:min(96vmin,980px);
-  aspect-ratio:16/10;               /* base desktop */
+  aspect-ratio:16/10;
   cursor:pointer;perspective:1000px;
 }
 .envelope .base{
@@ -80,7 +80,7 @@ body.opened .bg-floral{opacity:0;}
   display:grid;place-items:center;
   box-shadow:0 10px 20px rgba(0,0,0,.1);
   padding:2%;
-  overflow:hidden;                   /* evita que la frase se escape */
+  overflow:hidden;
 }
 /* Contenido dentro del papel del sobre */
 .paper-content{
@@ -102,11 +102,8 @@ body.opened .bg-floral{opacity:0;}
 
 /* --------- Ajustes específicos para móviles --------- */
 @media (max-width:480px){
-  .envelope{ aspect-ratio: 4/3; }       /* forma más alta y estable en teléfono */
-  .envelope .paper{
-    left:7%; right:7%;
-    top:38%; bottom:8%;                 /* baja un poco el papel y deja espacio */
-  }
+  .envelope{ aspect-ratio: 4/3; }
+  .envelope .paper{ left:7%; right:7%; top:38%; bottom:8%; }
   .paper-content img{ width:min(28vmin,132px); }
   .paper-note{ font-size:.98rem; }
   .btn{ font-size:.8rem; padding:8px 12px; }
@@ -123,23 +120,28 @@ body.opened .bg-floral{opacity:0;}
   padding:clamp(18px,4vw,26px);
   margin:26px auto;
 }
-.wrap > .card:last-of-type{margin-bottom:16px;} /* elimina espacio extra en desktop */
-.title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3.3vw,1.9rem);color:var(--dorado);margin-bottom:.4rem;}
+.wrap > .card:last-of-type{margin-bottom:16px;}
+.title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3.3vw,1.9rem);color:var(--dorado);margin-bottom:.5rem;}
+
+/* ===== Espaciado extra entre textos y botones (fix) ===== */
+.card:not(.hero) .btn{ margin-top:.7rem; }              /* separa botones del texto */
+.card .playlist-note + .btn,
+.card .playlist-note + div{ margin-top:.6rem; }          /* por si hay párrafo previo */
 
 /* HERO como CARD */
-#hero{ scroll-margin-top:14px; } /* que no quede “cortado” al llegar por scroll */
+#hero{ scroll-margin-top:14px; }
 .hero{color:var(--verde);}
 .hero .script{font-family:'Great Vibes',cursive;font-size:2rem;color:var(--cobre);}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5.5vw,3rem);color:var(--dorado);margin:.35rem 0;}
 .hero .date{font-size:1rem;margin-bottom:1rem;color:var(--verde);}
 .hero .monogram img{width:136px;margin:1rem auto;filter:drop-shadow(0 3px 4px rgba(0,0,0,.1));}
 
-/* Countdown + botones chicos — más compacto */
+/* Countdown — más compacto */
 .countdown{ display:flex;justify-content:center;gap:10px; margin:.7rem auto .9rem;flex-wrap:wrap; }
 .countdown .tile{ background:var(--crema);border:1px solid var(--dorado);border-radius:12px;width:58px;height:58px;display:flex;flex-direction:column;justify-content:center;align-items:center;box-shadow:0 4px 10px rgba(0,0,0,.08); }
 .countdown .num{font-size:1.15rem;font-weight:700;color:var(--dorado);}
 .countdown .lab{font-size:.72rem;color:var(--verde);}
-.hero .actions{margin-top:.5rem;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;}
+.hero .actions{margin-top:.6rem;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;}
 .hero .btn{ padding:7px 12px; font-size:.8rem; box-shadow:0 3px 8px rgba(0,0,0,.13); }
 @media (max-width:480px){
   .countdown .tile{width:54px;height:54px;}
@@ -199,7 +201,7 @@ body.opened .bg-floral{opacity:0;}
   margin-top:.5rem;
   font-family:'Playfair Display',serif;
   font-size:1rem;
-  color:rgba(184,104,48,0.95); /* var(--cobre) suavizado */
+  color:rgba(184,104,48,0.95);
 }
 @media(max-width:480px){ .playlist-note{font-size:.95rem;} }
 
@@ -224,7 +226,6 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:18px 0 10px;}
         </div>
       </div>
     </div>
-    <!-- Botón comentado (por si lo deseas activar de nuevo) -->
     <!-- <button class="btn" id="openBtn">Abrir invitación</button> -->
   </div>
 </section>
@@ -302,17 +303,17 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:18px 0 10px;}
     <p style="opacity:.85;font-size:.95rem;margin-top:.6rem;">(El tono claro se reserva para la novia, y el burdeo en corbata para el novio 💒)</p>
   </section>
 
-  <!-- Solo adultos (sección propia) -->
+  <!-- Solo adultos -->
   <section class="card fade-in">
     <div class="title">Solo adultos 🕺💃</div>
     <div class="playlist-note">Para que todos puedan disfrutar al máximo, la celebración es <strong>solo para adultos</strong>.</div>
   </section>
 
-  <!-- Lista de regalos (sección propia) -->
+  <!-- Lista de regalos -->
   <section class="card fade-in">
     <div class="title">Lista de regalos 🎁</div>
     <div class="playlist-note">Tu presencia es lo más importante, pero si quieres tener un detalle, aquí encontrarás nuestra lista o nuestros datos.</div>
-    <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:.4rem;">
+    <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:.6rem;">
       <a class="btn" href="https://novios.falabella.com/info-evento/evento?codigoEvento=2100121" target="_blank" rel="noopener">Ver lista</a>
       <a class="btn" href="Datos_regalo_Mica_Jaime.pdf" target="_blank" rel="noopener">Datos bancarios</a>
     </div>
@@ -361,7 +362,7 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:18px 0 10px;}
 const body = document.body;
 const env  = document.getElementById('envelope');
 const app  = document.getElementById('app');
-const openBtn = document.getElementById('openBtn'); // puede no existir (comentado)
+const openBtn = document.getElementById('openBtn'); // puede no existir
 const paperLogo = document.getElementById('paperLogo');
 
 function scrollToInvite(){
@@ -371,8 +372,7 @@ function scrollToInvite(){
 
 function openInvite(){
   env.classList.add('open');
-  body.classList.add('opened'); // crossfade del fondo floral
-  // Espera a que termine la animación y el layout esté listo antes de scrollear
+  body.classList.add('opened');
   setTimeout(()=>{
     app.classList.remove('hidden');
     const cards=document.querySelectorAll('.card,.hero,footer');
