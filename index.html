@@ -201,7 +201,8 @@ body.opened .bg-floral{opacity:0;}
 .countdown .lab{font-size:.72rem;color:var(--verde);}
 .hero .actions{margin-top:.5rem;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;}
 
-
+/* Collage */
+/* Collage — versión mejorada sin huecos */
 /* ==== Collage elegante con fotos destacadas ==== */
 .collage {
   display: grid;
@@ -300,78 +301,38 @@ body.opened .bg-floral{opacity:0;}
   max-width:760px;
 }
 
-/* Mapa vintage — versión más compacta */
-.map-frame {
-  position: relative;
-  width: 90%;                /* antes 100%, reduce ancho */
-  max-width: 620px;          /* antes 840px */
-  margin: 12px auto 0;
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid #d0b88a;
-  box-shadow: 
-    inset 0 0 0 2px rgba(255,255,255,0.65),
-    0 8px 18px rgba(0,0,0,0.12);
+/* Mapa vintage */
+.map-frame{
+  position:relative; width:100%; max-width:840px;
+  margin:10px auto 0; border-radius:16px; overflow:hidden;
+  border:1px solid #d0b88a;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.65), 0 10px 24px rgba(0,0,0,.12);
+}
+.map-frame img{display:block;width:100%;height:auto; filter: sepia(.55) contrast(1.05) saturate(.8) brightness(.96);}
+.map-frame::after{
+  content:"";position:absolute;inset:0;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,.18), transparent 55%),
+              repeating-linear-gradient(0deg, rgba(0,0,0,.03), rgba(0,0,0,.03) 2px, transparent 2px, transparent 4px);
+  mix-blend-mode:multiply;pointer-events:none;
+}
+.map-frame .label{
+  position:absolute;left:14px;bottom:14px;
+  background:rgba(247,243,235,.92);
+  color:#6b5b3a;border:1px solid #d0b88a;
+  padding:6px 12px;border-radius:10px;
+  font-family:'Playfair Display',serif;font-size:1rem;
+  box-shadow:0 2px 6px rgba(0,0,0,.12);
+}
+.map-frame .pin{
+  position:absolute;top:58%; left:62%;
+  transform:translate(-50%,-90%); font-size:1.6rem;
+  text-shadow:0 1px 3px rgba(0,0,0,.35);
 }
 
-/* Efecto vintage */
-.map-frame img {
-  display: block;
-  width: 100%;
-  height: auto;
-  filter: sepia(0.55) contrast(1.05) saturate(0.8) brightness(0.96);
-}
-
-.map-frame::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(ellipse at center, rgba(0,0,0,.18), transparent 55%),
-    repeating-linear-gradient(0deg, rgba(0,0,0,.03), rgba(0,0,0,.03) 2px, transparent 2px, transparent 4px);
-  mix-blend-mode: multiply;
-  pointer-events: none;
-}
-
-/* Etiqueta inferior */
-.map-frame .label {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  background: rgba(247,243,235,.92);
-  color: #6b5b3a;
-  border: 1px solid #d0b88a;
-  padding: 5px 10px;
-  border-radius: 8px;
-  font-family: 'Playfair Display', serif;
-  font-size: 0.9rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,.12);
-}
-
-/* Pin más pequeño */
-.map-frame .pin {
-  position: absolute;
-  top: 58%;
-  left: 62%;
-  transform: translate(-50%,-90%);
-  font-size: 1.3rem;       /* antes 1.6rem */
-  text-shadow: 0 1px 3px rgba(0,0,0,.35);
-}
-
-/* En pantallas pequeñas */
-@media (max-width: 600px) {
-  .map-frame {
-    width: 92%;
-    max-width: 480px;
-  }
-  .map-frame .label {
-    font-size: 0.8rem;
-    padding: 4px 8px;
-  }
-  .map-frame .pin {
-    font-size: 1.1rem;
-  }
-} 
+footer{text-align:center;font-size:.9rem;opacity:.75;margin:18px 0 10px;}
+</style>
+</head>
+<body>
 
 <!-- Fondo floral -->
 <div class="bg-floral"></div>
