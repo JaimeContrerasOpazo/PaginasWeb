@@ -83,7 +83,14 @@ body.opened .bg-floral{opacity:0;}
   background:repeating-linear-gradient(0deg, rgba(255,255,255,.05), rgba(255,255,255,.05) 2px, transparent 2px, transparent 4px);
   mix-blend-mode:overlay;opacity:.35;pointer-events:none;
 }
-
+/* Solapa triangular */
+.envelope .flap{
+  position:absolute;inset:0 0 50% 0;
+  background:linear-gradient(to bottom,#d2b68f 0%,#c19b6e 55%,#b58e64 100%);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top;transition:transform 1s cubic-bezier(.19,1,.22,1);
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.12));
+}
 /* Borde/contorno de la solapa MÁS marcado (laterales) */
 .envelope .flap::before,
 .envelope .flap::after{
