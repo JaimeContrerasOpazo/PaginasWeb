@@ -203,6 +203,7 @@ body.opened .bg-floral{opacity:0;}
 
 /* Collage */
 /* Collage — versión mejorada sin huecos */
+/* ==== Collage elegante con fotos destacadas ==== */
 .collage {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -211,15 +212,43 @@ body.opened .bg-floral{opacity:0;}
   margin-top: 1.2rem;
 }
 
+/* Fotos normales */
 .collage img {
   width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1; /* fuerza proporción cuadrada */
+  height: 100%;
   object-fit: cover;
-  object-position: center;
   border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover */
+.collage img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Fotos destacadas para dinamismo */
+.collage img.big {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.collage img.tall {
+  grid-row: span 2;
+}
+.collage img.wide {
+  grid-column: span 2;
+}
+
+@media (max-width: 700px) {
+  .collage {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .collage img.big {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
 }
 
 .collage img:hover {
@@ -354,19 +383,18 @@ footer{text-align:center;font-size:.9rem;opacity:.75;margin:18px 0 10px;}
   <section class="card fade-in">
     <div class="title">Parte de Nuestra Historia</div>
     <div class="title-emoji">🦔 ❤️ 🐈</div>
-    <div class="collage">
-      <img src="IMG_8695.JPG" alt="Mica y Jaime" class="tall" />
-      <img src="IMG_8710.JPG" alt="Mica y Jaime" />
-      <img src="Foto_Lima.JPEG" alt="Mica y Jaime" class="face" />
-      <img src="San_Andre.JPEG" alt="Mica y Jaime" />
-      <img src="MATRI.png" alt="Mica y Jaime" class="big" />
-      <img src="QUILLON.png" alt="Mica y Jaime" />
-      <img src="Foto_reemplazo.png" alt="Mica y Jaime" />
-      <img src="RIO_TIGRE.JPEG" alt="Mica y Jaime" class="face" />
-      <img src="LAPA.png" alt="Mica y Jaime" />
-      <img src="coliumo.JPEG" alt="Mica y Jaime" />
-    </div>
-  </section>
+<div class="collage">
+  <img src="IMG_8695.JPG" alt="Mica y Jaime" class="big" />
+  <img src="IMG_8710.JPG" alt="Mica y Jaime" />
+  <img src="Foto_Lima.JPEG" alt="Mica y Jaime" class="tall" />
+  <img src="San_Andre.JPEG" alt="Mica y Jaime" />
+  <img src="MATRI.png" alt="Mica y Jaime" class="wide" />
+  <img src="QUILLON.png" alt="Mica y Jaime" />
+  <img src="Foto_reemplazo.png" alt="Mica y Jaime" />
+  <img src="RIO_TIGRE.JPEG" alt="Mica y Jaime" class="tall" />
+  <img src="LAPA.png" alt="Mica y Jaime" />
+  <img src="coliumo.JPEG" alt="Mica y Jaime" />
+</div>  </section>
 
   <!-- Itinerario (sin duplicados) -->
   <section class="card itinerary fade-in">
